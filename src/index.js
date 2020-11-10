@@ -1,3 +1,8 @@
+//Marker Layer Groups
+var allMarkers = L.layerGroup();
+var myMarkers = L.layerGroup();
+var localMarkers = L.layerGroup();
+
 // Define some maps options
 var mapOptions = {
   center: [37.9844, 23.7281],
@@ -18,6 +23,9 @@ var mapBoxOutdoors = L.tileLayer(
     zoomOffset: -1
   }
 ).addTo(leafletMap);
+
+
+
 
 const markerText = {
   removableAndEditable: `<h3>Επεξεργάσιμο Αναδυόμενο Παράθυρο</h3> Μπορείτε να αλλάξετε το μήνυμα πατώντας <b>Edit</b> <br>και να το αφαιρέσετε επιλέγοντας  <b>Remove this market</b><br><br>`,
