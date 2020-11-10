@@ -20,7 +20,8 @@ var mapBoxOutdoors = L.tileLayer(
 ).addTo(leafletMap);
 
 const markerText = {
-  removableAndEditable: `<h3>Επεξεργάσιμο Αναδυόμενο Παράθυρο</h3> Μπορείτε να αλλάξετε το μήνυμα πατώντας <b>Edit</b> <br>και να το αφαιρέσετε επιλέγοντας  <b>Remove this market</b><br><br>`
+  removableAndEditable: `<h3>Επεξεργάσιμο Αναδυόμενο Παράθυρο</h3> Μπορείτε να αλλάξετε το μήνυμα πατώντας <b>Edit</b> <br>και να το αφαιρέσετε επιλέγοντας  <b>Remove this market</b><br><br>`,
+  markerLocationText: "<b>Θέση σημείου:</b><br>"
 };
 
 //------------------------------------------------------------------------//
@@ -33,9 +34,10 @@ leafletMap.on("click", function (e) {
     .addTo(leafletMap)
     .bindPopup(
       markerText.removableAndEditable +
-      `
-     Latitude: ${markerPosition.lat}<br>
-     Longitude: ${markerPosition.lng}`,
+        markerText.markerLocationText +
+        `
+      <b>Latitude:</b> ${markerPosition.lat}<br>
+      <b>Longitude:</b> ${markerPosition.lng}`,
       { removable: true, editable: true, maxWidth: 600, autoPan: false }
     )
     .openPopup();
