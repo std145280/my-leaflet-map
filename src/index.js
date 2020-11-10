@@ -1,7 +1,7 @@
 // Define some maps options
 var mapOptions = {
-  center: [33.27, -116.65],
-  zoom: 8
+  center: [37.9844, 23.7281],
+  zoom: 12
 };
 
 //Create a map and assign it to the map div
