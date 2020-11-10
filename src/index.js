@@ -9,11 +9,13 @@ var leafletMap = L.map("leafletMapid", mapOptions);
 
 //  Add a baselayer
 var mapBoxOutdoors = L.tileLayer(
-  "https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}",
+  "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=0XlfM4fhgeaEeNyF9jNG",
   {
+    maxZoom: 18,
     attribution:
-      "Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri",
-    maxZoom: 18
+      '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+    tileSize: 512,
+    zoomOffset: -1
   }
 ).addTo(leafletMap);
 
