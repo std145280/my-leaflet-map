@@ -19,16 +19,8 @@ var mapBoxOutdoors = L.tileLayer(
   }
 ).addTo(leafletMap);
 
-const sampleMarkerText = {
-  // Note how popup content can be written as an HTML string, or as JSX within a single node:
-
-  removableAndEditable: `<h3>This marker is removable and its popup is editable.</h3>
-    <p>Leaflet-Popup-Modifier can make a popup editable, removable, both, or neither.  You can add <code>edtiable</code> or <code>removable</code> to its options to decide what type of popup you want.<br>
-    <br>
-    Go to the <a href="https://github.com/slutske22/leaflet-popup-modifier" target="_blank">GitHub page</a> for this plugin to read more about it.</p>`,
-
-  removable: `<h3>This Jormungandr is removable.</h3>
-    <p>The Leaflet-Popup-Modifier plugin will automatically name each leaflet map element to properly render the "Remove this {thing}" link.  If you want to customize the name, you can add the <code>nametag: <i>'yourNametag'</i></code> option to a removable popup.</p>`
+const markerText = {
+  removableAndEditable: `<h3>Επεξεργάσιμο Αναδυόμενο Παράθυρο</h3> Μπορείτε να αλλάξετε το μήνυμα πατώντας <b>Edit</b> <br>και να το αφαιρέσετε επιλέγοντας  <b>Remove this market</b><br><br>`
 };
 
 //------------------------------------------------------------------------//
@@ -40,6 +32,7 @@ leafletMap.on("click", function (e) {
   let marker = L.marker(markerPosition)
     .addTo(leafletMap)
     .bindPopup(
+      markerText.removableAndEditable +
       `
      Latitude: ${markerPosition.lat}<br>
      Longitude: ${markerPosition.lng}`,
