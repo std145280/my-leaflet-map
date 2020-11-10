@@ -1,8 +1,3 @@
-// Useful round number function
-function roundNumber(number, tensplace = 10) {
-  return Math.round(number * tensplace) / tensplace;
-}
-
 // Define some maps options
 var mapOptions = {
   center: [33.27, -116.65],
@@ -54,39 +49,6 @@ makeMarker.addEventListener("click", function () {
     )
     .openPopup();
 });
-
-//------------------------------------------------------------------------//
-//                HARDCODED MARKERS
-//------------------------------------------------------------------------//
-
-let marker1 = L.marker([33.27, -116.65]);
-
-marker1
-  .addTo(leafletMap)
-  .bindPopup(sampleMarkerText.removableAndEditable, {
-    removable: true,
-    editable: true,
-    maxWidth: 450,
-    autoPan: false
-  })
-  .openPopup();
-
-const oilrigIcon = new L.Icon({
-  iconUrl: "./src/loch-ness-monster.png",
-  iconSize: [68, 68],
-  iconAnchor: [34, 34],
-  popupAnchor: [1, -10]
-});
-
-let marker2 = L.marker([32.57, -117.95], { icon: oilrigIcon })
-  .addTo(leafletMap)
-  .bindPopup(sampleMarkerText.removable, {
-    removable: true,
-    editable: true,
-    nametag: "Bringer of Ragnarok",
-    maxWidth: 400,
-    autoPan: false
-  });
 
 document.addEventListener("removeMarker", (e) => {
   console.log(e);
