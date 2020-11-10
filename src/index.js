@@ -32,14 +32,10 @@ const sampleMarkerText = {
 };
 
 //------------------------------------------------------------------------//
-//                DROP A MARKER IN CENTER
+//                ADDS AN EDITABLE MARKER AT THE PLACE YOU CLICK
 //------------------------------------------------------------------------//
-
-// Define buttons
-var makeMarker = document.querySelector("#makeMarker");
-
-makeMarker.addEventListener("click", function () {
-  let markerPosition = leafletMap.getCenter();
+leafletMap.on("click", function (e) {
+  let markerPosition = e.latlng;
 
   let marker = L.marker(markerPosition)
     .addTo(leafletMap)
