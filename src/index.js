@@ -9,7 +9,6 @@ var myIcon = L.icon({
   popupAnchor: [-15, -20] // point from which the popup should open relative to the iconAnchor
 });
 
-
 // Define some maps options
 var mapOptions = {
   center: [37.9844, 23.7281],
@@ -35,11 +34,13 @@ var mapBoxOutdoors = L.tileLayer(
 var allMarkers = L.layerGroup();
 var myMarkers = L.layerGroup();
 var localMarkers = L.layerGroup();
+var importedMarkers = L.layerGroup();
 
 // Add layer options to map
 var mapLayers = {
   "My Markers": myMarkers,
   "All Markers": allMarkers,
+  "Imported Markers": importedMarkers,
   "Markers Around Me": localMarkers
 };
 L.control.layers(mapLayers, null).addTo(leafletMap);
@@ -56,8 +57,9 @@ const markerText = {
 var geojson = new L.GeoJSON.AJAX("data/places.geojson");
 geojson.on("data:loaded", function () {
   geojson.addTo(leafletMap);
+  geojson.addTo(allMarkers);
+  geojson.addTo(importedMarkers);
 });
-
 
 //------------------------------------------------------------------------//
 //                ADDS AN EDITABLE MARKER AT THE PLACE YOU CLICK
@@ -96,13 +98,11 @@ addMarkerToMe.addEventListener("click", function () {
         { removable: true, editable: true, maxWidth: 600, autoPan: false }
       )
       .openPopup();
-      
       marker.addTo(localMarkers);
       marker.addTo(allMarkers);
-      marker.addTo(myMarkers);    
+      marker.addTo(myMarkers);
   });
 });
-
 
 document.addEventListener("removeMarker", (e) => {
   console.log(e);
