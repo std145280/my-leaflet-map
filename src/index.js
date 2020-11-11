@@ -51,6 +51,15 @@ const markerText = {
 };
 
 //------------------------------------------------------------------------//
+//                READS A GEOJson file with data
+//------------------------------------------------------------------------//
+var geojson = new L.GeoJSON.AJAX("data/places.geojson");
+geojson.on("data:loaded", function () {
+  geojson.addTo(leafletMap);
+});
+
+
+//------------------------------------------------------------------------//
 //                ADDS AN EDITABLE MARKER AT THE PLACE YOU CLICK
 //------------------------------------------------------------------------//
 leafletMap.on("click", function (e) {
@@ -72,7 +81,6 @@ leafletMap.on("click", function (e) {
 });
 
 var addMarkerToMe = document.querySelector("#addMarkerToMe");
-
 addMarkerToMe.addEventListener("click", function () {
   navigator.geolocation.getCurrentPosition(function (ex) {
     leafletMap.locate({ setView: true, maxZoom: 15 });
