@@ -1,3 +1,4 @@
+var myPosition;
 //Marker Layer Groups
 var allMarkers = L.layerGroup();
 var myMarkers = L.layerGroup();
@@ -61,8 +62,20 @@ leafletMap.on("click", function (e) {
 var addMarkerToMe = document.querySelector("#addMarkerToMe");
 
 addMarkerToMe.addEventListener("click", function () {
-  navigator.geolocation.getCurrentPosition(function () {
+  navigator.geolocation.getCurrentPosition(function (ex) {
     leafletMap.locate({ setView: true, maxZoom: 15 });
+    myPosition = new L.latLng(ex.coords.latitude, ex.coords.longitude);
+    let marker = L.marker(myPosition)
+      .addTo(leafletMap)
+      .bindPopup(
+        markerText.removableAndEditable +
+        markerText.markerLocationText +
+        `
+      <b>Latitude:</b> ${myPosition.lat}<br>
+      <b>Longitude:</b> ${myPosition.lng}`,
+        { removable: true, editable: true, maxWidth: 600, autoPan: false }
+      )
+      .openPopup();
   });
 });
 
