@@ -1,8 +1,14 @@
 var myPosition;
-//Marker Layer Groups
-var allMarkers = L.layerGroup();
-var myMarkers = L.layerGroup();
-var localMarkers = L.layerGroup();
+
+//MyIcon Setup
+var myIcon = L.icon({
+  iconUrl: "images/myIcon.png",
+
+  iconSize: [48, 48], // size of the icon
+  iconAnchor: [40, 25], // point of the icon which will correspond to marker's location
+  popupAnchor: [-15, -20] // point from which the popup should open relative to the iconAnchor
+});
+
 
 // Define some maps options
 var mapOptions = {
@@ -24,6 +30,11 @@ var mapBoxOutdoors = L.tileLayer(
     zoomOffset: -1
   }
 ).addTo(leafletMap);
+
+//Marker Layer Groups
+var allMarkers = L.layerGroup();
+var myMarkers = L.layerGroup();
+var localMarkers = L.layerGroup();
 
 // Add layer options to map
 var mapLayers = {
@@ -66,7 +77,7 @@ addMarkerToMe.addEventListener("click", function () {
   navigator.geolocation.getCurrentPosition(function (ex) {
     leafletMap.locate({ setView: true, maxZoom: 15 });
     myPosition = new L.latLng(ex.coords.latitude, ex.coords.longitude);
-    let marker = L.marker(myPosition)
+    let marker = L.marker(myPosition, { icon: myIcon })
       .addTo(leafletMap)
       .bindPopup(
         markerText.myPlace +
