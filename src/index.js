@@ -69,7 +69,7 @@ addMarkerToMe.addEventListener("click", function () {
     let marker = L.marker(myPosition)
       .addTo(leafletMap)
       .bindPopup(
-        markerText.removableAndEditable +
+        markerText.myPlace +
         markerText.markerLocationText +
         `
       <b>Latitude:</b> ${myPosition.lat}<br>
