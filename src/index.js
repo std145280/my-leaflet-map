@@ -58,6 +58,15 @@ leafletMap.on("click", function (e) {
   marker.addTo(myMarkers);
 });
 
+var addMarkerToMe = document.querySelector("#addMarkerToMe");
+
+addMarkerToMe.addEventListener("click", function () {
+  navigator.geolocation.getCurrentPosition(function () {
+    leafletMap.locate({ setView: true, maxZoom: 15 });
+  });
+});
+
+
 document.addEventListener("removeMarker", (e) => {
   console.log(e);
 });
