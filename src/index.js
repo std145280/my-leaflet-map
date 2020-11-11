@@ -2787,6 +2787,62 @@ function toRadian(degree) {
 }
 
 //------------------------------------------------------------------------//
+//                      INSERTS GEOJson MARKERS
+//------------------------------------------------------------------------//
+function onEachFeature(feature, layer) {
+  var distance = getDistance(
+    [myPosition.lat, myPosition.lng],
+    [
+      layer.feature.geometry.coordinates[1],
+      layer.feature.geometry.coordinates[0]
+    ]
+  );
+
+  // does this feature have a property named popupContent?
+  if (distance < 50000) {
+    let position = L.latLng(
+      layer.feature.geometry.coordinates[1],
+      layer.feature.geometry.coordinates[0]
+    );
+    let marker = L.marker(position)
+      .addTo(leafletMap)
+      .addTo(localMarkers)
+      .addTo(importedMarkers)
+      .addTo(allMarkers)
+      .bindPopup(markerText.removableAndEditable, {
+        removable: true,
+        editable: true,
+        maxWidth: 600,
+        autoPan: false
+      });
+    layer.bindPopup(feature.properties.popupContent);
+  }
+
+  let position = L.latLng(
+    layer.feature.geometry.coordinates[1],
+    layer.feature.geometry.coordinates[0]
+  );
+  //imports other markers to the right layers
+  let marker = L.marker(position)
+    .addTo(importedMarkers)
+    .addTo(allMarkers)
+    .bindPopup(markerText.removableAndEditable, {
+      removable: true,
+      editable: true,
+      maxWidth: 600,
+      autoPan: false
+    });
+  layer.bindPopup(feature.properties.popupContent);
+}
+
+var thingsNearMe = document.querySelector("#thingsNearMe");
+thingsNearMe.addEventListener("click", function () {
+  L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+  });
+});
+
+//------------------------------------------------------------------------//
 //                ADDS AN EDITABLE MARKER AT THE PLACE YOU CLICK
 //------------------------------------------------------------------------//
 leafletMap.on("click", function (e) {
@@ -2824,8 +2880,7 @@ addMarkerToMe.addEventListener("click", function () {
       <b>Latitude:</b> ${myPosition.lat}<br>
       <b>Longitude:</b> ${myPosition.lng}`,
         { removable: true, editable: true, maxWidth: 600, autoPan: false }
-      )
-      .openPopup();
+      );
     marker.addTo(localMarkers);
     marker.addTo(allMarkers);
     marker.addTo(myMarkers);
