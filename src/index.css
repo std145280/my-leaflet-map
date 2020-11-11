@@ -16,9 +16,9 @@ body,
 }
 
 .controlButtons {
-  position: relative;
+  position: absolute;
   bottom: 50px;
-  right: -50px;
+  right: 50px;
   z-index: 10;
 }
 
