@@ -82,6 +82,9 @@ leafletMap.on("click", function (e) {
   marker.addTo(myMarkers);
 });
 
+//------------------------------------------------------------------------//
+//                ADDS AN EDITABLE MARKER AT YOUR PLACE
+//------------------------------------------------------------------------//
 var addMarkerToMe = document.querySelector("#addMarkerToMe");
 addMarkerToMe.addEventListener("click", function () {
   navigator.geolocation.getCurrentPosition(function (ex) {
@@ -91,16 +94,16 @@ addMarkerToMe.addEventListener("click", function () {
       .addTo(leafletMap)
       .bindPopup(
         markerText.myPlace +
-        markerText.markerLocationText +
-        `
+          markerText.markerLocationText +
+          `
       <b>Latitude:</b> ${myPosition.lat}<br>
       <b>Longitude:</b> ${myPosition.lng}`,
         { removable: true, editable: true, maxWidth: 600, autoPan: false }
       )
       .openPopup();
-      marker.addTo(localMarkers);
-      marker.addTo(allMarkers);
-      marker.addTo(myMarkers);
+    marker.addTo(localMarkers);
+    marker.addTo(allMarkers);
+    marker.addTo(myMarkers);
   });
 });
 
