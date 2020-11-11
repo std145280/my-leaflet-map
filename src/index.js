@@ -77,6 +77,10 @@ addMarkerToMe.addEventListener("click", function () {
         { removable: true, editable: true, maxWidth: 600, autoPan: false }
       )
       .openPopup();
+      
+      marker.addTo(localMarkers);
+      marker.addTo(allMarkers);
+      marker.addTo(myMarkers);    
   });
 });
 
