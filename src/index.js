@@ -32,7 +32,6 @@ var mapLayers = {
 };
 L.control.layers(mapLayers, null).addTo(leafletMap);
 
-
 const markerText = {
   removableAndEditable: `<h3>Επεξεργάσιμο Αναδυόμενο Παράθυρο</h3> Μπορείτε να αλλάξετε το μήνυμα πατώντας <b>Edit</b> <br>και να το αφαιρέσετε επιλέγοντας  <b>Remove this market</b><br><br>`,
   markerLocationText: "<b>Θέση σημείου:</b><br>"
@@ -55,6 +54,8 @@ leafletMap.on("click", function (e) {
       { removable: true, editable: true, maxWidth: 600, autoPan: false }
     )
     .openPopup();
+  marker.addTo(allMarkers);
+  marker.addTo(myMarkers);
 });
 
 document.addEventListener("removeMarker", (e) => {
