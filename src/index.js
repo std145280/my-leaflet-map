@@ -24,7 +24,13 @@ var mapBoxOutdoors = L.tileLayer(
   }
 ).addTo(leafletMap);
 
-
+// Add layer options to map
+var mapLayers = {
+  "My Markers": myMarkers,
+  "All Markers": allMarkers,
+  "Markers Around Me": localMarkers
+};
+L.control.layers(mapLayers, null).addTo(leafletMap);
 
 
 const markerText = {
